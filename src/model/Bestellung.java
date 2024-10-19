@@ -75,15 +75,22 @@ public class Bestellung {
 
     //toString()-Methode
     @Override
-    public String toString(){
+    public String toString() {
         String status = bezahlt ? "Bezahlt" : "Nicht Bezahlt";
         String lieferung;
-        switch (lieferstatus){
-            case 1: lieferung = "Noch nicht versandt"; break;
-            case 2: lieferung = "Auf dem Versandweg"; break;
-            case 3: lieferung = "Beim Kunden eingetroffen"; break;
-            default: lieferung = "Unbekannt";
+        switch (lieferstatus) {
+            case 1:
+                lieferung = "Noch nicht versandt";
+                break;
+            case 2:
+                lieferung = "Auf dem Versandweg";
+                break;
+            case 3:
+                lieferung = "Beim Kunden eingetroffen";
+                break;
+            default:
+                lieferung = "Unbekannt";
         }
-        return String.format("%-20s | %-10s | %-8s | %s",bestellnummer, produkt, status, lieferung);
+        return String.format("%-10s | %-10s | %-10s | %-10s | %-10s | %s", bestellnummer, produkt, stueckzahl, betrag, status, lieferung);
     }
 }

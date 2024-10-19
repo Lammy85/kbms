@@ -5,10 +5,10 @@ import model.Kunde;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KundenServices {
+public class KundenService {
     private List<Kunde> kundenListe;
 
-    public KundenServices() {
+    public KundenService() {
         this.kundenListe = new ArrayList<>();
     }
 
@@ -22,6 +22,10 @@ public class KundenServices {
     public List<Kunde> getKundenListe() {
         return kundenListe;
     }
+
+    //Methoden zum Ändern von Kundendaten
+
+
 
 
 }
