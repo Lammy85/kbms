@@ -19,6 +19,7 @@ public class KundenService {
     }
 
     //Getter für die Kundenliste
+
     public List<Kunde> getKundenListe() {
         return kundenListe;
     }

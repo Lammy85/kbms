@@ -11,10 +11,13 @@ public class BestellungService {
     public BestellungService() { this.bestellungList = new ArrayList<>(); }
 
     //Methode zum Hinzufügen einer Bestellung
+
     public void bestellungHinzufuegen(Bestellung bestellung){
         bestellungList.add(bestellung);
         System.out.println("Bestellung hinzugefuegt: " + bestellung.getBestellnummer());
     }
+
+    //Getter für die Bestell-Liste
 
     public List<Bestellung> getBestellungList() {
         return bestellungList;

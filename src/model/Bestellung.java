@@ -24,7 +24,6 @@ public class Bestellung {
 
     //Getter und Setter
 
-
     public int getBestellnummer() {
         return bestellnummer;
     }
@@ -73,7 +72,8 @@ public class Bestellung {
         this.lieferstatus = lieferstatus;
     }
 
-    //toString()-Methode
+    //toString()-Methode überschreiben
+
     @Override
     public String toString() {
         String status = bezahlt ? "Bezahlt" : "Nicht Bezahlt";

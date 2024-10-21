@@ -26,7 +26,6 @@ public class Kunde {
 
     //Getter und Setter
 
-
     public String getVorname() {
         return vorname;
     }
