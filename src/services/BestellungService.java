@@ -28,6 +28,20 @@ public class BestellungService {
         return bestellungListe;
     }
 
+    // Methode Bestellung löschen
+    public boolean bestellungLoeschen(int bestellnummer) {
+        for (int i = 0; i < bestellungListe.size(); i++) {
+            Bestellung bestellung = bestellungListe.get(i);
+            if (bestellung.getBestellnummer() == (bestellnummer)) {
+                bestellungListe.remove(i);
+                System.out.println("Bestellung gelöscht: " + bestellnummer);
+                return true;
+            }
+        }
+        System.out.println("Kundennummer nicht gefunden: " + bestellnummer);
+        return false;
+    }
+
     //Bestellung in Textdatei speichern
 
     public void bestellungSpeichern() {

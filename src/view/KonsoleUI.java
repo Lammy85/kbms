@@ -51,6 +51,9 @@ public class KonsoleUI {
                 case 4:
                     kundenAnzeigenUI();
                     break;
+                case 5:
+                    bestellungLoeschenUI();
+                    break;
                 default:
                     System.out.println("Ungültige Wahl");
             }
@@ -65,6 +68,7 @@ public class KonsoleUI {
         System.out.println("2. Bestellung hinzufügen");
         System.out.println("3. Bestellungen anzeigen");
         System.out.println("4. Kunden anzeigen");
+        System.out.println("5. Bestellung löschen");
         System.out.println("0. Beenden");
         System.out.print("Auswahl: ");
     }
@@ -131,5 +135,17 @@ public class KonsoleUI {
         Kunde kunde = new Kunde(vorname, nachname, kundennummer, strasse, hausnummer, plz, wohnort);
         kundenService.kundeHinzufuegen(kunde);
 
+    }
+    private void bestellungLoeschenUI() {
+        System.out.print("Bestellnummer der zu löschenden Bestellung: ");
+        int bestellnummer = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Sind Sie sicher, dass Sie die Bestellung löschen möchten? (j/n): ");
+        String bestaetigung = scanner.nextLine();
+        if (bestaetigung.equalsIgnoreCase("j")) {
+            bestellungService.bestellungLoeschen(bestellnummer);
+        } else {
+            System.out.println("Löschvorgang abgebrochen.");
+        }
     }
 }
