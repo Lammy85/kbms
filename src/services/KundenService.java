@@ -63,8 +63,4 @@ public class KundenService {
             System.out.println("Keine Kundendaten zum Laden gefunden.");
         }
     }
-
-
-
-
 }

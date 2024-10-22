@@ -85,4 +85,12 @@ public class Kunde implements Serializable {
         this.wohnort = wohnort;
     }
 
+    //Überschreiben der toString()-Methode
+
+    @Override
+    public String toString() {
+
+        return String.format("%-15s | %-15s | %-15s | %-15s | %-15s | %-15s | %s\n", vorname, nachname, kundennummer, strasse, hausnummer, plz, wohnort);
+    }
+
 }

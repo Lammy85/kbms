@@ -48,6 +48,9 @@ public class KonsoleUI {
                 case 3:
                     bestellungenAnzeigenUI();
                     break;
+                case 4:
+                    kundenAnzeigenUI();
+                    break;
                 default:
                     System.out.println("Ungültige Wahl");
             }
@@ -61,7 +64,7 @@ public class KonsoleUI {
         System.out.println("1. Kunden hinzufügen");
         System.out.println("2. Bestellung hinzufügen");
         System.out.println("3. Bestellungen anzeigen");
-        //System.out.println("3. Kunde löschen");
+        System.out.println("4. Kunden anzeigen");
         System.out.println("0. Beenden");
         System.out.print("Auswahl: ");
     }
@@ -96,6 +99,15 @@ public class KonsoleUI {
         }
     }
 
+    private void kundenAnzeigenUI() {
+        System.out.println("\n-------Kunden----------");
+        System.out.printf("%-15s | %-15s | %-15s | %-15s | %-15s | %-15s | %s\n", "Vorname", "Nachname", "Kundennummer", "Straße", "Hausnummer", "Postleitzahl", "Wohnort");
+        System.out.println("-------------------------------------------------------------------");
+        for (Kunde kunde : kundenService.getKundenListe()) {
+            System.out.println(kunde);
+        }
+    }
+
     //Methode zum Hinzufügen neuer Kunden
 
     private void kundeHinzufuegenUI() {
@@ -112,9 +124,9 @@ public class KonsoleUI {
         int hausnummer = scanner.nextInt();
         System.out.print("Postleitzahl: ");
         int plz = scanner.nextInt();
+        scanner.nextLine();
         System.out.print("Wohnort: ");
         String wohnort = scanner.nextLine();
-        scanner.nextLine();
 
         Kunde kunde = new Kunde(vorname, nachname, kundennummer, strasse, hausnummer, plz, wohnort);
         kundenService.kundeHinzufuegen(kunde);
