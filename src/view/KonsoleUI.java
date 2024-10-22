@@ -5,7 +5,6 @@ import model.Kunde;
 import services.BestellungService;
 import services.KundenService;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class KonsoleUI {
@@ -89,7 +88,7 @@ public class KonsoleUI {
         System.out.println("\n-------Bestellungen----------");
         System.out.printf("%-10s | %-10s | %-10s | %-10s | %-10s | %s\n", "Bestellnummer", "Produkt", "Stückzahl", "Betrag", "Zahlungsstatus", "Lieferstatus");
         System.out.println("-------------------------------------------------------------------");
-        for (Bestellung bestellung : bestellungService.getBestellungList()) {
+        for (Bestellung bestellung : bestellungService.getBestellungListe()) {
             System.out.println(bestellung);
         }
     }
