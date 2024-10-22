@@ -94,6 +94,6 @@ public class Bestellung implements Serializable{
             default:
                 lieferung = "Unbekannt";
         }
-        return String.format("%-10s | %-10s | %-10s | %-10s | %-10s | %s", bestellnummer, produkt, stueckzahl, betrag, status, lieferung);
+        return String.format("%-15s | %-15s | %-15s | %-15s | %-15s | %s", bestellnummer, produkt, stueckzahl, betrag, status, lieferung);
     }
 }

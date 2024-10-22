@@ -32,14 +32,14 @@ public class BestellungService {
 
     public void bestellungSpeichern() {
         try {
-            File dateiB = new File(BESTELLDATEI);
-            File verzeichnis = dateiB.getParentFile();
+            File datei = new File(BESTELLDATEI);
+            File verzeichnis = datei.getParentFile();
 
             if (verzeichnis != null && !verzeichnis.exists()) {
                 //neues Verzeichnis erstellen
-                verzeichnis.mkdir();
+                verzeichnis.mkdirs();
             }
-            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dateiB))) {
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(datei))) {
                 oos.writeObject(bestellungListe);
                 System.out.println("Bestelldaten wurden erfolfgeich gespeichert.");
             }
@@ -51,9 +51,9 @@ public class BestellungService {
     //Bestellung in Textdatei laden
 
     private void bestellungLaden() {
-        File dateiB = new File(BESTELLDATEI);
-        if (dateiB.exists()) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dateiB))) {
+        File datei = new File(BESTELLDATEI);
+        if (datei.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(datei))) {
                 bestellungListe = (List<Bestellung>) ois.readObject();
                 System.out.println("Bestelldaten wurden erfolgreich geladen.");
             } catch (IOException | ClassNotFoundException e) {

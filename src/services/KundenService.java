@@ -13,6 +13,7 @@ public class KundenService {
 
     public KundenService() {
         this.kundenListe = new ArrayList<>();
+        kundenLaden();
     }
 
     //Methode zum Hinzufügen neuer Kunden
@@ -50,9 +51,9 @@ public class KundenService {
     //Kunden in Textdatei laden
 
     private void kundenLaden() {
-        File dateiB = new File(KUNDENDATEI);
-        if (dateiB.exists()) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dateiB))) {
+        File datei = new File(KUNDENDATEI);
+        if (datei.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(datei))) {
                 kundenListe = (List<Kunde>) ois.readObject();
                 System.out.println("Kundendaten wurden erfolgreich geladen.");
             } catch (IOException | ClassNotFoundException e) {

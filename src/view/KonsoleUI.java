@@ -71,9 +71,9 @@ public class KonsoleUI {
     private void bestellungHinzufuegenUI() {
         System.out.print("Bestellnummer: ");
         int bestellnummer = scanner.nextInt();
+        scanner.nextLine();
         System.out.print("Produkt: ");
         String produkt = scanner.nextLine();
-        scanner.nextLine();
         System.out.print("Stückzahl: ");
         int stueckzahl = scanner.nextInt();
         scanner.nextLine();
@@ -89,7 +89,7 @@ public class KonsoleUI {
 
     private void bestellungenAnzeigenUI() {
         System.out.println("\n-------Bestellungen----------");
-        System.out.printf("%-10s | %-10s | %-10s | %-10s | %-10s | %s\n", "Bestellnummer", "Produkt", "Stückzahl", "Betrag", "Zahlungsstatus", "Lieferstatus");
+        System.out.printf("%-15s | %-15s | %-15s | %-15s | %-15s | %s\n", "Bestellnummer", "Produkt", "Stückzahl", "Betrag EUR", "Zahlungsstatus", "Lieferstatus");
         System.out.println("-------------------------------------------------------------------");
         for (Bestellung bestellung : bestellungService.getBestellungListe()) {
             System.out.println(bestellung);

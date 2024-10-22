@@ -1,9 +1,12 @@
 package model;
 
-public class Kunde {
+import java.io.Serializable;
+
+public class Kunde implements Serializable {
 
     //Eigenschaften
 
+    private static final long serialVersionUID = 1L;
     private String vorname;
     private String nachname;
     private int kundennummer;
@@ -82,8 +85,4 @@ public class Kunde {
         this.wohnort = wohnort;
     }
 
-    //toString()-Methode
-    //@Override
-    //public String toString() {
-    //}
 }
