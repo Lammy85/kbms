@@ -8,10 +8,11 @@ import java.util.List;
 
 public class BestellungService {
     private List<Bestellung> bestellungListe;
-    private static final String BESTELLDATEI = "data/Testliste.txt";
+    private static final String BESTELLDATEI = "data/BestellListe.txt";
 
     public BestellungService() {
         this.bestellungListe = new ArrayList<>();
+        bestellungLaden();
     }
 
     //Methode zum Hinzufügen einer Bestellung
@@ -40,10 +41,10 @@ public class BestellungService {
             }
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dateiB))) {
                 oos.writeObject(bestellungListe);
-                System.out.println("Daten wurden erfolfgeich gespeichert.");
+                System.out.println("Bestelldaten wurden erfolfgeich gespeichert.");
             }
         } catch (IOException e) {
-            System.out.println("Fehler beim Speichern der Daten: " + e.getMessage());
+            System.out.println("Fehler beim Speichern der Bestelldaten: " + e.getMessage());
         }
     }
 
@@ -54,12 +55,12 @@ public class BestellungService {
         if (dateiB.exists()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dateiB))) {
                 bestellungListe = (List<Bestellung>) ois.readObject();
-                System.out.println("Daten wurden erfolgreich geladen.");
+                System.out.println("Bestelldaten wurden erfolgreich geladen.");
             } catch (IOException | ClassNotFoundException e) {
-                System.out.println("Fehler beim Laden der Daten: " + e.getMessage());
+                System.out.println("Fehler beim Laden der Bestelldaten: " + e.getMessage());
             }
         } else {
-            System.out.println("Keine Daten zum Laden gefunden.");
+            System.out.println("Keine Bestelldaten zum Laden gefunden.");
         }
     }
 }

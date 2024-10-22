@@ -1,12 +1,15 @@
 package services;
 
+import model.Bestellung;
 import model.Kunde;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class KundenService {
     private List<Kunde> kundenListe;
+    private static final String KUNDENDATEI = "data/Kundenliste.txt";
 
     public KundenService() {
         this.kundenListe = new ArrayList<>();
@@ -24,7 +27,41 @@ public class KundenService {
         return kundenListe;
     }
 
-    //Methoden zum Ändern von Kundendaten
+    //Kunden in Textdatei speichern
+
+    public void kundenSpeichern() {
+        try {
+            File dateiB = new File(KUNDENDATEI);
+            File verzeichnis = dateiB.getParentFile();
+
+            if (verzeichnis != null && !verzeichnis.exists()) {
+                //neues Verzeichnis erstellen
+                verzeichnis.mkdir();
+            }
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dateiB))) {
+                oos.writeObject(kundenListe);
+                System.out.println("Kundendaten wurden erfolfgeich gespeichert.");
+            }
+        } catch (IOException e) {
+            System.out.println("Fehler beim Speichern der Kundendaten: " + e.getMessage());
+        }
+    }
+
+    //Kunden in Textdatei laden
+
+    private void kundenLaden() {
+        File dateiB = new File(KUNDENDATEI);
+        if (dateiB.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dateiB))) {
+                kundenListe = (List<Kunde>) ois.readObject();
+                System.out.println("Kundendaten wurden erfolgreich geladen.");
+            } catch (IOException | ClassNotFoundException e) {
+                System.out.println("Fehler beim Laden der Kundendaten: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Keine Kundendaten zum Laden gefunden.");
+        }
+    }
 
 
 

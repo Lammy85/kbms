@@ -1,9 +1,12 @@
 package model;
 
-public class Bestellung {
+import java.io.Serializable;
+
+public class Bestellung implements Serializable{
 
     //Eigenschaften
 
+    private static final long serialVersionUID = 1L;
     private int bestellnummer;
     private String produkt;
     private int stueckzahl;

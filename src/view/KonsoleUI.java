@@ -34,6 +34,9 @@ public class KonsoleUI {
             scanner.nextLine();
             switch (wahl) {
                 case 0:
+                    kundenService.kundenSpeichern();
+                    bestellungService.bestellungSpeichern();
+                    System.out.println("Bis zum nächsten Mal.");
                     run = false;
                     break;
                 case 1:
