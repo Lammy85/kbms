@@ -304,7 +304,7 @@ public class kbmsGUI extends Application {
             return new javafx.beans.property.SimpleStringProperty(statusText);
         });
 
-        tableView.getColumns().addAll(bestnrColumn, produktColumn, stkzahlColumn, betragColumn, bezahltColumn);
+        tableView.getColumns().addAll(bestnrColumn, produktColumn, stkzahlColumn, betragColumn, bezahltColumn, lieferstatusColumn);
 
         //Daten laden
         tableView.getItems().addAll(bestellungService.getBestellungListe());
