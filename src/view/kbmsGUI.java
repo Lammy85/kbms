@@ -10,8 +10,6 @@ import model.Kunde;
 import services.BestellungService;
 import services.KundenService;
 
-import java.lang.classfile.Label;
-
 public class kbmsGUI extends Application {
 
     private BestellungService bestellungService;
@@ -92,17 +90,41 @@ public class kbmsGUI extends Application {
             int plz = Integer.parseInt(plzFeld.getText());
             String wohnort = ortFeld.getText();
 
-            if (kundennummer.isEmpty()){
-            showAlert("Fehler","Bitte Kundennummer vergeben");
+            if (kundennummer <= 0) {
+                showAlert("Fehler", "Bitte gültige Kundennummer vergeben");
+                return;
             }
 
             Kunde kunde = new Kunde(vorname, nachname, kundennummer, strasse, hausnummer, plz, wohnort);
             kundenService.kundeHinzufuegen(kunde);
 
-            showAlert("Erfolg","Kunde hinzugefügt");
+            showAlert("Erfolg", "Kunde hinzugefügt");
         });
+
+        Button cancelButton = new Button("Abbrechen");
+        cancelButton.setOnAction(e -> showHauptmenue());
+
+        HBox buttonBox = new HBox(10,addButton,cancelButton);
+
+        kiste.getChildren().addAll(
+                new Label("Neuen Kunden hinzufügen"),
+                vornameFeld,
+                nachnameFeld,
+                knrFeld,
+                strasseFeld,
+                hausnummerFeld,
+                plzFeld,
+                ortFeld,
+                buttonBox
+        );
+
+        Scene scene = new Scene(kiste,400,400);
+        buehne.setTitle("Kunde hinzufügen");
+        buehne.setScene(scene);
+        buehne.show();
     }
-    private void showAlert(String title, String message){
+
+    private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);

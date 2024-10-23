@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KundenService {
+
     private List<Kunde> kundenListe;
     private static final String KUNDENDATEI = "data/Kundenliste.txt";
 
