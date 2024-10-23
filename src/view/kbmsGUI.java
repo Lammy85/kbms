@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.util.converter.IntegerStringConverter;
 import model.Bestellung;
 import model.Kunde;
 import services.BestellungService;
@@ -45,9 +44,14 @@ public class kbmsGUI extends Application {
         Button addBestellung = new Button("Bestellung hinzufügen");
         addBestellung.setOnAction(e -> showAddBestellung());
 
-        kiste.getChildren().addAll(titleLabel, addKunde, viewKunden, addBestellung);
+        Button viewBestellung = new Button("Bestellungen anzeigen");
+        viewBestellung.setOnAction(e -> showBestellListeView());
 
-        Scene scene = new Scene(kiste, 300, 200);
+        //Knöpfe werden hier eingefügt
+
+        kiste.getChildren().addAll(titleLabel, addKunde, viewKunden, addBestellung, viewBestellung);
+
+        Scene scene = new Scene(kiste, 600, 600);
         buehne.setTitle("KBMS - Hauptmenü");
         buehne.setScene(scene);
         buehne.show();
@@ -129,7 +133,7 @@ public class kbmsGUI extends Application {
                 buttonBox
         );
 
-        Scene scene = new Scene(kiste, 400, 400);
+        Scene scene = new Scene(kiste, 600, 600);
         buehne.setTitle("Kunde hinzufügen");
         buehne.setScene(scene);
         buehne.show();
@@ -199,7 +203,7 @@ public class kbmsGUI extends Application {
                 buttonBox
         );
 
-        Scene scene = new Scene(kiste, 400, 400);
+        Scene scene = new Scene(kiste, 600, 600);
         buehne.setTitle("Bestellung hinzufügen");
         buehne.setScene(scene);
         buehne.show();
@@ -253,8 +257,71 @@ public class kbmsGUI extends Application {
 
         kiste.getChildren().addAll(new Label("Alle Kunden"), tableView, buttonBox);
 
-        Scene scene = new Scene(kiste, 600, 400);
+        Scene scene = new Scene(kiste, 600, 600);
         buehne.setTitle("Kundenliste anzeigen");
+        buehne.setScene(scene);
+        buehne.show();
+
+    }
+
+    private void showBestellListeView() {
+        //Layout
+        VBox kiste = new VBox(20);
+        kiste.setPadding(new Insets(20));
+
+        //Tabellenansicht für die Bestellungen
+
+        TableView<Bestellung> tableView = new TableView<>();
+
+        //Colums
+
+        TableColumn<Bestellung, String> bestnrColumn = new TableColumn<>("Bestellnummer");
+        bestnrColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(String.valueOf(cellData.getValue().getBestellnummer())));
+
+        TableColumn<Bestellung, String> produktColumn = new TableColumn<>("Produktbezeichnung");
+        produktColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getProdukt()));
+
+        TableColumn<Bestellung, String> stkzahlColumn = new TableColumn<>("Stückzahl");
+        stkzahlColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(String.valueOf(cellData.getValue().getStueckzahl())));
+
+        TableColumn<Bestellung, String> betragColumn = new TableColumn<>("Betrag EUR");
+        betragColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(String.valueOf(cellData.getValue().getBetrag())));
+
+        TableColumn<Bestellung, String> bezahltColumn = new TableColumn<>("Zahlungsstatus");
+        bezahltColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(
+                cellData.getValue().isBezahlt() ? "Bezahlt" : "Offen"
+                ));
+
+        TableColumn<Bestellung, String> lieferstatusColumn = new TableColumn<>("Lieferstatus");
+        lieferstatusColumn.setCellValueFactory(cellData -> {
+            int status = cellData.getValue().getLieferstatus();
+            String statusText = switch (status) {
+                case 1 -> "Noch nicht versandt";
+                case 2 -> "Auf dem Versandweg";
+                case 3 -> "Beim Kunden eingetroffen";
+                default -> "Unbekannt";
+            };
+            return new javafx.beans.property.SimpleStringProperty(statusText);
+        });
+
+        tableView.getColumns().addAll(bestnrColumn, produktColumn, stkzahlColumn, betragColumn, bezahltColumn);
+
+        //Daten laden
+        tableView.getItems().addAll(bestellungService.getBestellungListe());
+
+        //Buttons
+
+        Button zurueckButton = new Button("Zurück zum Hauptmenü");
+        zurueckButton.setOnAction(e -> showHauptmenue());
+
+        HBox buttonBox = new HBox(10, zurueckButton);
+
+        //Anzeigen
+
+        kiste.getChildren().addAll(new Label("Alle Bestellungen"), tableView, buttonBox);
+
+        Scene scene = new Scene(kiste, 600, 400);
+        buehne.setTitle("Bestellungen anzeigen");
         buehne.setScene(scene);
         buehne.show();
 
