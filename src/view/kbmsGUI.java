@@ -128,6 +128,7 @@ public class kbmsGUI extends Application {
         buehne.show();
     }
 
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
