@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import model.Bestellung;
 import model.Kunde;
 import services.BestellungService;
 import services.KundenService;
@@ -128,6 +129,74 @@ public class kbmsGUI extends Application {
         buehne.show();
     }
 
+    private void showAddBestellung() {
+
+        //Layout
+
+        VBox kiste = new VBox(20);
+        kiste.setPadding(new Insets(20));
+
+        //Inputs
+
+        TextField bestnrFeld = new TextField();
+        bestnrFeld.setPromptText("Bestellnummer");
+
+        TextField produktFeld = new TextField();
+        produktFeld.setPromptText("Produktbezeichnung");
+
+        TextField stkFeld = new TextField();
+        stkFeld.setPromptText("Stückzahl");
+
+        TextField betragFeld = new TextField();
+        betragFeld.setPromptText("Betrag EUR");
+
+
+        //Bestellung hinzufügen button
+
+        Button addButton = new Button("Bestellung hinzufügen");
+        addButton.setOnAction(e -> {
+
+            int bestellnummer = Integer.parseInt(bestnrFeld.getText());
+            String produkt = produktFeld.getText();
+            int stueckzahl = Integer.parseInt(stkFeld.getText());
+            float betrag = Float.parseFloat(betragFeld.getText());
+
+
+            if (bestellnummer <= 0) {
+                showAlert("Fehler", "Bitte gültige Bestellnummer vergeben");
+                return;
+            }
+
+            Bestellung bestellung = new Bestellung(bestellnummer, produkt,stueckzahl,betrag);
+            bestellungService.bestellungHinzufuegen(bestellung);
+
+            showAlert("Erfolg", "Bestellung hinzugefügt");
+
+            //Zurück zum Hauptmenü
+
+            showHauptmenue();
+        });
+
+        Button cancelButton = new Button("Abbrechen");
+        cancelButton.setOnAction(e -> showHauptmenue());
+
+        HBox buttonBox = new HBox(10,addButton,cancelButton);
+
+        kiste.getChildren().addAll(
+                new Label("Neue Bestellung hinzufügen"),
+                bestnrFeld,
+                produktFeld,
+                stkFeld,
+                betragFeld,
+                buttonBox
+        );
+
+        Scene scene = new Scene(kiste,400,400);
+        buehne.setTitle("Bestellung hinzufügen");
+        buehne.setScene(scene);
+        buehne.show();
+    }
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -137,13 +206,11 @@ public class kbmsGUI extends Application {
         alert.showAndWait();
     }
 
-    private void showAddBestellung() {
-
-    }
 
     @Override
     public void stop() throws Exception {
         kundenService.kundenSpeichern();
+        bestellungService.bestellungSpeichern();
         super.stop();
     }
 
