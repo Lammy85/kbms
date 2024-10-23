@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.util.converter.IntegerStringConverter;
 import model.Bestellung;
 import model.Kunde;
 import services.BestellungService;
@@ -38,16 +39,21 @@ public class kbmsGUI extends Application {
         Button addKunde = new Button("Kunde hinzufügen");
         addKunde.setOnAction(e -> showAddKunde());
 
+        Button viewKunden = new Button("Kunden anzeigen");
+        viewKunden.setOnAction(e -> showKundenListeView());
+
         Button addBestellung = new Button("Bestellung hinzufügen");
         addBestellung.setOnAction(e -> showAddBestellung());
 
-        kiste.getChildren().addAll(titleLabel, addKunde, addBestellung);
+        kiste.getChildren().addAll(titleLabel, addKunde, viewKunden, addBestellung);
 
         Scene scene = new Scene(kiste, 300, 200);
         buehne.setTitle("KBMS - Hauptmenü");
         buehne.setScene(scene);
         buehne.show();
     }
+
+    //Kunden hinzufügen
 
     private void showAddKunde() {
 
@@ -109,7 +115,7 @@ public class kbmsGUI extends Application {
         Button cancelButton = new Button("Abbrechen");
         cancelButton.setOnAction(e -> showHauptmenue());
 
-        HBox buttonBox = new HBox(10,addButton,cancelButton);
+        HBox buttonBox = new HBox(10, addButton, cancelButton);
 
         kiste.getChildren().addAll(
                 new Label("Neuen Kunden hinzufügen"),
@@ -123,11 +129,13 @@ public class kbmsGUI extends Application {
                 buttonBox
         );
 
-        Scene scene = new Scene(kiste,400,400);
+        Scene scene = new Scene(kiste, 400, 400);
         buehne.setTitle("Kunde hinzufügen");
         buehne.setScene(scene);
         buehne.show();
     }
+
+    //Bestellungen hinzufügen
 
     private void showAddBestellung() {
 
@@ -167,7 +175,7 @@ public class kbmsGUI extends Application {
                 return;
             }
 
-            Bestellung bestellung = new Bestellung(bestellnummer, produkt,stueckzahl,betrag);
+            Bestellung bestellung = new Bestellung(bestellnummer, produkt, stueckzahl, betrag);
             bestellungService.bestellungHinzufuegen(bestellung);
 
             showAlert("Erfolg", "Bestellung hinzugefügt");
@@ -180,7 +188,7 @@ public class kbmsGUI extends Application {
         Button cancelButton = new Button("Abbrechen");
         cancelButton.setOnAction(e -> showHauptmenue());
 
-        HBox buttonBox = new HBox(10,addButton,cancelButton);
+        HBox buttonBox = new HBox(10, addButton, cancelButton);
 
         kiste.getChildren().addAll(
                 new Label("Neue Bestellung hinzufügen"),
@@ -191,10 +199,65 @@ public class kbmsGUI extends Application {
                 buttonBox
         );
 
-        Scene scene = new Scene(kiste,400,400);
+        Scene scene = new Scene(kiste, 400, 400);
         buehne.setTitle("Bestellung hinzufügen");
         buehne.setScene(scene);
         buehne.show();
+    }
+
+    private void showKundenListeView() {
+        //Layout
+        VBox kiste = new VBox(20);
+        kiste.setPadding(new Insets(20));
+
+        //Tabellenansicht für die Kunden
+
+        TableView<Kunde> tableView = new TableView<>();
+
+        //Colums
+
+        TableColumn<Kunde, String> vornameColumn = new TableColumn<>("Vorname");
+        vornameColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getVorname()));
+
+        TableColumn<Kunde, String> nachnameColumn = new TableColumn<>("Nachname");
+        nachnameColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getNachname()));
+
+        TableColumn<Kunde, String> knrColumn = new TableColumn<>("Kundennummer");
+        knrColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(String.valueOf(cellData.getValue().getKundennummer())));
+
+        TableColumn<Kunde, String> strColumn = new TableColumn<>("Straße");
+        strColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getStrasse()));
+
+        TableColumn<Kunde, String> hsnrColumn = new TableColumn<>("Hausnummer");
+        hsnrColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(String.valueOf(cellData.getValue().getHausnummer())));
+
+        TableColumn<Kunde, String> plzColumn = new TableColumn<>("Postleitzahl");
+        plzColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(String.valueOf(cellData.getValue().getPlz())));
+
+        TableColumn<Kunde, String> ortColumn = new TableColumn<>("Wohnort");
+        ortColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getWohnort()));
+
+        tableView.getColumns().addAll(vornameColumn, nachnameColumn, knrColumn, strColumn, hsnrColumn, plzColumn, ortColumn);
+
+        //Daten laden
+        tableView.getItems().addAll(kundenService.getKundenListe());
+
+        //Buttons
+
+        Button zurueckButton = new Button("Zurück zum Hauptmenü");
+        zurueckButton.setOnAction(e -> showHauptmenue());
+
+        HBox buttonBox = new HBox(10, zurueckButton);
+
+        //Anzeigen
+
+        kiste.getChildren().addAll(new Label("Alle Kunden"), tableView, buttonBox);
+
+        Scene scene = new Scene(kiste, 600, 400);
+        buehne.setTitle("Kundenliste anzeigen");
+        buehne.setScene(scene);
+        buehne.show();
+
     }
 
 
@@ -206,6 +269,7 @@ public class kbmsGUI extends Application {
         alert.showAndWait();
     }
 
+    //Speichern der Listen bei Beendigung des Programms
 
     @Override
     public void stop() throws Exception {
