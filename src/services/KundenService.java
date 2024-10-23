@@ -64,4 +64,18 @@ public class KundenService {
             System.out.println("Keine Kundendaten zum Laden gefunden.");
         }
     }
+
+    // Methode Kunden löschen
+    public boolean kundenLoeschen(int kundennummer) {
+        for (int i = 0; i < kundenListe.size(); i++) {
+            Kunde kunde = kundenListe.get(i);
+            if (kunde.getKundennummer() == (kundennummer)) {
+                kundenListe.remove(i);
+                System.out.println("Kunde gelöscht: " + kundennummer);
+                return true;
+            }
+        }
+        System.out.println("Kundennummer nicht gefunden: " + kundennummer);
+        return false;
+    }
 }

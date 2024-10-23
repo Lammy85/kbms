@@ -248,10 +248,22 @@ public class kbmsGUI extends Application {
 
         //Buttons
 
+        Button deleteButton = new Button("Kunde löschen");
+        deleteButton.setOnAction(e -> {
+            Kunde selectedKunde = tableView.getSelectionModel().getSelectedItem();
+            if (selectedKunde != null) {
+                kundenService.kundenLoeschen(selectedKunde.getKundennummer());
+                showAlert("Erfolg", "Kunde gelöscht");
+                showKundenListeView();
+            }else {
+                showAlert("Fehler","Bitte wählen Sie einen Kunden aus");
+            }
+        });
+
         Button zurueckButton = new Button("Zurück zum Hauptmenü");
         zurueckButton.setOnAction(e -> showHauptmenue());
 
-        HBox buttonBox = new HBox(10, zurueckButton);
+        HBox buttonBox = new HBox(10, deleteButton, zurueckButton);
 
         //Anzeigen
 
@@ -311,10 +323,22 @@ public class kbmsGUI extends Application {
 
         //Buttons
 
+        Button deleteButton = new Button("Bestellung löschen");
+        deleteButton.setOnAction(e -> {
+            Bestellung selectedBestellung = tableView.getSelectionModel().getSelectedItem();
+            if (selectedBestellung != null) {
+                bestellungService.bestellungLoeschen(selectedBestellung.getBestellnummer());
+                showAlert("Erfolg", "Bestellung gelöscht");
+                showBestellListeView();
+            }else {
+                showAlert("Fehler","Bitte wählen Sie eine Bestellung aus");
+            }
+        });
+
         Button zurueckButton = new Button("Zurück zum Hauptmenü");
         zurueckButton.setOnAction(e -> showHauptmenue());
 
-        HBox buttonBox = new HBox(10, zurueckButton);
+        HBox buttonBox = new HBox(10, deleteButton,zurueckButton);
 
         //Anzeigen
 

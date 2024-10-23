@@ -38,7 +38,7 @@ public class BestellungService {
                 return true;
             }
         }
-        System.out.println("Kundennummer nicht gefunden: " + bestellnummer);
+        System.out.println("Bestellnummer nicht gefunden: " + bestellnummer);
         return false;
     }
 
