@@ -99,6 +99,10 @@ public class kbmsGUI extends Application {
             kundenService.kundeHinzufuegen(kunde);
 
             showAlert("Erfolg", "Kunde hinzugefügt");
+
+            //Zurück zum Hauptmenü
+
+            showHauptmenue();
         });
 
         Button cancelButton = new Button("Abbrechen");
@@ -134,6 +138,12 @@ public class kbmsGUI extends Application {
 
     private void showAddBestellung() {
 
+    }
+
+    @Override
+    public void stop() throws Exception {
+        kundenService.kundenSpeichern();
+        super.stop();
     }
 
     public static void main(String[] args) {
