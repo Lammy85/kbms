@@ -1,0 +1,16 @@
+.button {
+        -fx-font : 12px "Lucida Console";
+        -fx-padding : 10;
+        -fx-background-color : #a3b3ff;
+    }
+Label {
+        -fx-font: 20px "Arial";
+        -fx-font-weight: bold;
+}
+
+
+
+
+
+
+

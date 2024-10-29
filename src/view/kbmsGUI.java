@@ -51,7 +51,8 @@ public class kbmsGUI extends Application {
 
         kiste.getChildren().addAll(titleLabel, addKunde, viewKunden, addBestellung, viewBestellung);
 
-        Scene scene = new Scene(kiste, 600, 600);
+        Scene scene = new Scene(kiste, 400, 400);
+        kiste.getStylesheets().add("style1.css");
         buehne.setTitle("KBMS - Hauptmenü");
         buehne.setScene(scene);
         buehne.show();
@@ -133,7 +134,8 @@ public class kbmsGUI extends Application {
                 buttonBox
         );
 
-        Scene scene = new Scene(kiste, 600, 600);
+        Scene scene = new Scene(kiste, 400, 500);
+        kiste.getStylesheets().add("style1.css");
         buehne.setTitle("Kunde hinzufügen");
         buehne.setScene(scene);
         buehne.show();
@@ -203,7 +205,8 @@ public class kbmsGUI extends Application {
                 buttonBox
         );
 
-        Scene scene = new Scene(kiste, 600, 600);
+        Scene scene = new Scene(kiste, 400, 400);
+        kiste.getStylesheets().add("style1.css");
         buehne.setTitle("Bestellung hinzufügen");
         buehne.setScene(scene);
         buehne.show();
@@ -269,7 +272,8 @@ public class kbmsGUI extends Application {
 
         kiste.getChildren().addAll(new Label("Alle Kunden"), tableView, buttonBox);
 
-        Scene scene = new Scene(kiste, 600, 600);
+        Scene scene = new Scene(kiste, 900, 400);
+        kiste.getStylesheets().add("style1.css");
         buehne.setTitle("Kundenliste anzeigen");
         buehne.setScene(scene);
         buehne.show();
@@ -358,7 +362,8 @@ public class kbmsGUI extends Application {
 
         kiste.getChildren().addAll(new Label("Alle Bestellungen"), tableView, buttonBox);
 
-        Scene scene = new Scene(kiste, 600, 400);
+        Scene scene = new Scene(kiste, 900, 400);
+        kiste.getStylesheets().add("style1.css");
         buehne.setTitle("Bestellungen anzeigen");
         buehne.setScene(scene);
         buehne.show();
