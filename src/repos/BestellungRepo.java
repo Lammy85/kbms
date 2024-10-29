@@ -24,7 +24,7 @@ public class BestellungRepo {
                 CREATE TABLE IF NOT EXISTS bestellungen (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     bestellnummer INTEGER,
-                    produkt VARCHAR(100)
+                    produkt VARCHAR(100),
                     stueckzahl INTEGER,
                     betrag FLOAT,
                     bezahlt BOOLEAN,
