@@ -6,7 +6,7 @@ import repos.BestellungRepo;
 import java.util.List;
 
 public class BestellungService {
-    private BestellungRepo repository;
+    private final BestellungRepo repository;
 
     public BestellungService() {
         this.repository = new BestellungRepo("store.db");
