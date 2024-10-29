@@ -331,6 +331,7 @@ public class kbmsGUI extends Application {
             if (selectedBestellung != null) {
                 bestellungService.bestellungBezahlt(selectedBestellung.getBestellnummer());
                 showAlert("Erfolg","Bestellung als Bezahlt markiert.");
+                showBestellListeView();
             } else {
                 showAlert("Fehler", "Bitte Bestellung auswählen.");
             }
