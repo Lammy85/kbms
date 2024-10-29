@@ -9,7 +9,7 @@ public class BestellungService {
     private final BestellungRepo repository;
 
     public BestellungService() {
-        this.repository = new BestellungRepo("store.db");
+        this.repository = new BestellungRepo("database/store.db");
     }
 
     //Methode zum Hinzufügen einer Bestellung

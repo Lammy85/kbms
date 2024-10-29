@@ -16,6 +16,7 @@ public class kbmsGUI extends Application {
     private BestellungService bestellungService;
     private KundenService kundenService;
     private Stage buehne;
+    final String cssPath = "css/style1.css";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -52,7 +53,7 @@ public class kbmsGUI extends Application {
         kiste.getChildren().addAll(titleLabel, addKunde, viewKunden, addBestellung, viewBestellung);
 
         Scene scene = new Scene(kiste, 400, 400);
-        kiste.getStylesheets().add("style1.css");
+        kiste.getStylesheets().add(cssPath);
         buehne.setTitle("KBMS - Hauptmenü");
         buehne.setScene(scene);
         buehne.show();
@@ -135,7 +136,7 @@ public class kbmsGUI extends Application {
         );
 
         Scene scene = new Scene(kiste, 400, 500);
-        kiste.getStylesheets().add("style1.css");
+        kiste.getStylesheets().add(cssPath);
         buehne.setTitle("Kunde hinzufügen");
         buehne.setScene(scene);
         buehne.show();
@@ -206,7 +207,7 @@ public class kbmsGUI extends Application {
         );
 
         Scene scene = new Scene(kiste, 400, 400);
-        kiste.getStylesheets().add("style1.css");
+        kiste.getStylesheets().add(cssPath);
         buehne.setTitle("Bestellung hinzufügen");
         buehne.setScene(scene);
         buehne.show();
@@ -273,7 +274,7 @@ public class kbmsGUI extends Application {
         kiste.getChildren().addAll(new Label("Alle Kunden"), tableView, buttonBox);
 
         Scene scene = new Scene(kiste, 900, 400);
-        kiste.getStylesheets().add("style1.css");
+        kiste.getStylesheets().add(cssPath);
         buehne.setTitle("Kundenliste anzeigen");
         buehne.setScene(scene);
         buehne.show();
@@ -363,7 +364,7 @@ public class kbmsGUI extends Application {
         kiste.getChildren().addAll(new Label("Alle Bestellungen"), tableView, buttonBox);
 
         Scene scene = new Scene(kiste, 900, 400);
-        kiste.getStylesheets().add("style1.css");
+        kiste.getStylesheets().add(cssPath);
         buehne.setTitle("Bestellungen anzeigen");
         buehne.setScene(scene);
         buehne.show();
