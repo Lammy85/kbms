@@ -218,7 +218,7 @@ public class kbmsGUI extends Application {
 
         TableView<Kunde> tableView = new TableView<>();
 
-        //Colums
+        //Columns
 
         TableColumn<Kunde, String> vornameColumn = new TableColumn<>("Vorname");
         vornameColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getVorname()));
@@ -255,8 +255,8 @@ public class kbmsGUI extends Application {
                 kundenService.kundenLoeschen(selectedKunde.getKundennummer());
                 showAlert("Erfolg", "Kunde gelöscht");
                 showKundenListeView();
-            }else {
-                showAlert("Fehler","Bitte wählen Sie einen Kunden aus");
+            } else {
+                showAlert("Fehler", "Bitte wählen Sie einen Kunden aus");
             }
         });
 
@@ -302,7 +302,7 @@ public class kbmsGUI extends Application {
         TableColumn<Bestellung, String> bezahltColumn = new TableColumn<>("Zahlungsstatus");
         bezahltColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(
                 cellData.getValue().isBezahlt() ? "Bezahlt" : "Offen"
-                ));
+        ));
 
         TableColumn<Bestellung, String> lieferstatusColumn = new TableColumn<>("Lieferstatus");
         lieferstatusColumn.setCellValueFactory(cellData -> {
@@ -330,15 +330,15 @@ public class kbmsGUI extends Application {
                 bestellungService.bestellungLoeschen(selectedBestellung.getBestellnummer());
                 showAlert("Erfolg", "Bestellung gelöscht");
                 showBestellListeView();
-            }else {
-                showAlert("Fehler","Bitte wählen Sie eine Bestellung aus");
+            } else {
+                showAlert("Fehler", "Bitte wählen Sie eine Bestellung aus");
             }
         });
 
         Button zurueckButton = new Button("Zurück zum Hauptmenü");
         zurueckButton.setOnAction(e -> showHauptmenue());
 
-        HBox buttonBox = new HBox(10, deleteButton,zurueckButton);
+        HBox buttonBox = new HBox(10, deleteButton, zurueckButton);
 
         //Anzeigen
 
