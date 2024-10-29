@@ -1,81 +1,43 @@
 package services;
 
 import model.Bestellung;
+import repos.BestellungRepo;
 
-import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BestellungService {
-    private List<Bestellung> bestellungListe;
-    private static final String BESTELLDATEI = "data/BestellListe.txt";
+    private BestellungRepo repository;
 
     public BestellungService() {
-        this.bestellungListe = new ArrayList<>();
-        bestellungLaden();
+        this.repository = new BestellungRepo("store.db");
     }
 
     //Methode zum Hinzufügen einer Bestellung
 
     public void bestellungHinzufuegen(Bestellung bestellung) {
-        bestellungListe.add(bestellung);
+        repository.bestellungHinzufuegen(bestellung);
         System.out.println("Bestellung hinzugefuegt: " + bestellung.getBestellnummer());
     }
 
     //Getter für die Bestell-Liste
 
     public List<Bestellung> getBestellungListe() {
-        return bestellungListe;
+        return repository.getBestellungen();
+    }
+
+    public void bestellungBezahlt(int bestellnummer) {
+        repository.bestellungBezahlt(bestellnummer);
+        System.out.println("Bestellung als Bezahlt markiert: " + bestellnummer);
     }
 
     // Methode Bestellung löschen
-    public boolean bestellungLoeschen(int bestellnummer) {
-        for (int i = 0; i < bestellungListe.size(); i++) {
-            Bestellung bestellung = bestellungListe.get(i);
-            if (bestellung.getBestellnummer() == (bestellnummer)) {
-                bestellungListe.remove(i);
-                System.out.println("Bestellung gelöscht: " + bestellnummer);
-                return true;
-            }
-        }
-        System.out.println("Bestellnummer nicht gefunden: " + bestellnummer);
-        return false;
+    public void bestellungLoeschen(int bestellnummer) {
+        repository.bestellungLoeschen(bestellnummer);
+        System.out.println("Bestellung gelöscht: " + bestellnummer);
     }
 
-    //Bestellung in Textdatei speichern
-
-    public void bestellungSpeichern() {
-        try {
-            File datei = new File(BESTELLDATEI);
-            File verzeichnis = datei.getParentFile();
-
-            if (verzeichnis != null && !verzeichnis.exists()) {
-                //neues Verzeichnis erstellen
-                verzeichnis.mkdirs();
-            }
-            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(datei))) {
-                oos.writeObject(bestellungListe);
-                System.out.println("Bestelldaten wurden erfolfgeich gespeichert.");
-            }
-        } catch (IOException e) {
-            System.out.println("Fehler beim Speichern der Bestelldaten: " + e.getMessage());
-        }
-    }
-
-    //Bestellung in Textdatei laden
-
-    private void bestellungLaden() {
-        File datei = new File(BESTELLDATEI);
-        if (datei.exists()) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(datei))) {
-                bestellungListe = (List<Bestellung>) ois.readObject();
-                System.out.println("Bestelldaten wurden erfolgreich geladen.");
-            } catch (IOException | ClassNotFoundException e) {
-                System.out.println("Fehler beim Laden der Bestelldaten: " + e.getMessage());
-            }
-        } else {
-            System.out.println("Keine Bestelldaten zum Laden gefunden.");
-        }
+    public void close() {
+        repository.close();
     }
 }
 

@@ -360,15 +360,6 @@ public class kbmsGUI extends Application {
         alert.showAndWait();
     }
 
-    //Speichern der Listen bei Beendigung des Programms
-
-    @Override
-    public void stop() throws Exception {
-        kundenService.kundenSpeichern();
-        bestellungService.bestellungSpeichern();
-        super.stop();
-    }
-
     public static void main(String[] args) {
         launch(args);
     }
