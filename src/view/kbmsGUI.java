@@ -1,6 +1,7 @@
 package view;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -51,6 +52,7 @@ public class kbmsGUI extends Application {
         //Knöpfe werden hier eingefügt
 
         kiste.getChildren().addAll(titleLabel, addKunde, viewKunden, addBestellung, viewBestellung);
+        kiste.setAlignment(Pos.TOP_CENTER);
 
         Scene scene = new Scene(kiste, 400, 400);
         kiste.getStylesheets().add(cssPath);

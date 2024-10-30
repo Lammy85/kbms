@@ -1,7 +1,17 @@
 .button {
-        -fx-font : 12px "Lucida Console";
+        -fx-min-width: 100;
+        -fx-pref-width: 200;
+        -fx-max-width: 300;
+        -fx-font : 12px "Arial";
+        -fx-font-weight: bold;
         -fx-padding : 10;
-        -fx-background-color : #a3b3ff;
+        -fx-background-color:
+                linear-gradient(#f0ff35, #a9ff00),
+                radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
+            -fx-background-radius: 6, 5;
+            -fx-background-insets: 0, 1;
+            -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+            -fx-text-fill: #395306;
     }
 .label {
         -fx-font: 15px "Arial";
@@ -11,7 +21,6 @@
 
 .tableview {
         -fx-font: 15px "Lucida Console";
-        -fx-
         -fx-background-color: #bd00b6;
 }
 .table-view .column-header .label{
@@ -25,6 +34,7 @@
   -fx-cell-size: 35;
   -fx-alignment: CENTER;
   }
+
 
 
 
