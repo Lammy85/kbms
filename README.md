@@ -14,7 +14,7 @@ Hauptfunktionen
     Kunden anzeigen
         Funktion: Zeigt alle im System gespeicherten Kunden an.
         Details:
-            Such- und Filteroptionen, z. B. nach Name oder ID (geplant, aber noch nicht umgesetzt).
+            Such- und Filteroptionen, z. B. nach Name oder ID (geplant).
             Ausgabe in einer strukturierten Ansicht, ggf. tabellarisch mit den wichtigsten Kundeninformationen.
 
     Bestellungen erstellen
