@@ -14,16 +14,17 @@
             -fx-text-fill: #395306;
     }
 .label {
-        -fx-font: 15px "Arial";
+        -fx-font: 25px "Arial";
         -fx-font-weight: bold;
         -fx-text-fill: #bd00b6;
 }
 
 .tableview {
-        -fx-font: 15px "Lucida Console";
+        -fx-font: 12px "Lucida Console";
         -fx-background-color: #bd00b6;
 }
 .table-view .column-header .label{
+   -fx-font-size: 14px;
    -fx-text-fill: white;
    -fx-background-color: #bd00b6;
    -fx-font-weight: bold;
