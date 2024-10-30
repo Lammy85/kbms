@@ -1,80 +1,38 @@
 package services;
 
 import model.Kunde;
+import repos.KundeRepo;
 
-import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class KundenService {
-
-    private List<Kunde> kundenListe;
-    private static final String KUNDENDATEI = "data/Kundenliste.txt";
+    private final KundeRepo repository;
 
     public KundenService() {
-        this.kundenListe = new ArrayList<>();
-        kundenLaden();
+        this.repository = new KundeRepo("database/store.db");
     }
 
     //Methode zum Hinzufügen neuer Kunden
+
     public void kundeHinzufuegen(Kunde kunde) {
-        kundenListe.add(kunde);
+        repository.kundeHinzufuegen(kunde);
         System.out.println("Kunde hinzugefügt: " + kunde.getKundennummer());
     }
 
     //Getter für die Kundenliste
 
     public List<Kunde> getKundenListe() {
-        return kundenListe;
+        return repository.getKunde();
     }
 
-    //Kunden in Textdatei speichern
+// Methode Kunden löschen
 
-    public void kundenSpeichern() {
-        try {
-            File dateiB = new File(KUNDENDATEI);
-            File verzeichnis = dateiB.getParentFile();
-
-            if (verzeichnis != null && !verzeichnis.exists()) {
-                //neues Verzeichnis erstellen
-                verzeichnis.mkdir();
-            }
-            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dateiB))) {
-                oos.writeObject(kundenListe);
-                System.out.println("Kundendaten wurden erfolfgeich gespeichert.");
-            }
-        } catch (IOException e) {
-            System.out.println("Fehler beim Speichern der Kundendaten: " + e.getMessage());
-        }
+    public void kundenLoeschen(int kundennummer) {
+        repository.kundeLoeschen(kundennummer);
     }
 
-    //Kunden in Textdatei laden
-
-    private void kundenLaden() {
-        File datei = new File(KUNDENDATEI);
-        if (datei.exists()) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(datei))) {
-                kundenListe = (List<Kunde>) ois.readObject();
-                System.out.println("Kundendaten wurden erfolgreich geladen.");
-            } catch (IOException | ClassNotFoundException e) {
-                System.out.println("Fehler beim Laden der Kundendaten: " + e.getMessage());
-            }
-        } else {
-            System.out.println("Keine Kundendaten zum Laden gefunden.");
-        }
-    }
-
-    // Methode Kunden löschen
-    public boolean kundenLoeschen(int kundennummer) {
-        for (int i = 0; i < kundenListe.size(); i++) {
-            Kunde kunde = kundenListe.get(i);
-            if (kunde.getKundennummer() == (kundennummer)) {
-                kundenListe.remove(i);
-                System.out.println("Kunde gelöscht: " + kundennummer);
-                return true;
-            }
-        }
-        System.out.println("Kundennummer nicht gefunden: " + kundennummer);
-        return false;
+    public void close() {
+        repository.close();
     }
 }
+
