@@ -3,12 +3,14 @@ package repos;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.DecimalFormat;
 
 import model.Bestellung;
 
 public class BestellungRepo {
 
     private Connection connection;
+    //DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
     public BestellungRepo(String dbPath) {
         try {
